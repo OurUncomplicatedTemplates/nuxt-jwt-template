@@ -1,9 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     modules: [
-        '@nuxtjs/tailwindcss',
         '@pinia/nuxt',
         '@nuxt/devtools',
+        '@nuxthq/ui',
+        '@vueuse/nuxt',
+        '@nuxtjs/i18n',
     ],
 
     devtools: {

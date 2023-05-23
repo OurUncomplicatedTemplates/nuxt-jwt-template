@@ -1,42 +1,26 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+## Modules
 
-Make sure to install the dependencies:
+### Nuxt DevTools
+https://devtools.nuxtjs.org/guide
 
-```bash
-# yarn
-yarn install
+### Nuxt UI
+https://ui.nuxtlabs.com
 
-# npm
-npm install
+### Tailwind
+https://tailwindcss.com/docs/installation
+https://tailwindcss.nuxtjs.org/getting-started/setup
 
-# pnpm
-pnpm install
-```
+### VueUse
+https://vueuse.org/guide/
+https://vueuse.org/nuxt/README.html
 
-## Development Server
+### Pinia
+https://pinia.vuejs.org/introduction.html
+https://pinia.vuejs.org/ssr/nuxt.html
 
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Nuxt i18n
+https://i18n.nuxtjs.org/
