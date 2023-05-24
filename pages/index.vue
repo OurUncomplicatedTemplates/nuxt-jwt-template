@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Welcome to the {{ homepage }}</h1>
+    <div class="mt-40 mx-auto">
+        <h1 class="text-center">Welcome to the {{ homepage }}</h1>
     </div>
 </template>
 
