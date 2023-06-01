@@ -7,10 +7,10 @@
             </UInputGroup>
 
             <UInputGroup label="Password" hint="Required" class="my-5" required>
-                <UInput v-model="password" name="password" placeholder="********" icon="i-heroicons-lock-closed" />
+                <UInput name="password" placeholder="********" icon="i-heroicons-lock-closed" />
             </UInputGroup>
 
-            <UButton class="mt-8" block @click="">
+            <UButton class="mt-8" block @click="submit">
                 <b>Submit</b>
             </UButton>
         </form>
@@ -22,10 +22,27 @@ definePageMeta({
     layout: "public",
 });
 
+let user = useAuth();
+
 let email: string = '';
 let password: string = '';
 
-function submit() {
-    navigateTo('/user')
+async function submit() {
+    try {
+        const { data } = await useFetch('/api/auth/login', {
+            method: 'POST',
+            body: {
+                'email': email,
+                'password': password,
+            }
+        })
+        console.log(data);
+
+        console.log(response);
+
+        //navigateTo('/user');
+    } catch (error) {
+        console.log(error.response);
+    }
 }
 </script>
