@@ -22,5 +22,11 @@ export default defineNuxtConfig({
                 port: 5173
             }
         }
+    },
+
+    runtimeConfig: {
+        public: {
+            apiBaseUrl: 'http://localhost:3001/api'
+        }
     }
 })

@@ -7,7 +7,7 @@
             </UInputGroup>
 
             <UInputGroup label="Password" hint="Required" class="my-5" required>
-                <UInput name="password" placeholder="********" icon="i-heroicons-lock-closed" />
+                <UInput v-model="password" name="password" placeholder="********" icon="i-heroicons-lock-closed" />
             </UInputGroup>
 
             <UButton class="mt-8" block @click="submit">
@@ -29,7 +29,8 @@ let password: string = '';
 
 async function submit() {
     try {
-        const { data } = await useFetch('/api/auth/login', {
+        const runtimeConfig = useRuntimeConfig()
+        const { data } = await useFetch(`${runtimeConfig.public.apiBaseUrl}/auth/login`, {
             method: 'POST',
             body: {
                 'email': email,
