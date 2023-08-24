@@ -9,7 +9,11 @@ export default defineNuxtConfig({
     ],
 
     devtools: {
+      enabled: true,
+
+      timeline: {
         enabled: true
+      }
     },
 
     typescript: {
@@ -26,7 +30,7 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
-            apiBaseUrl: 'http://localhost:3001/api'
+            apiBaseUrl: 'http://127.0.0.1:3001/api'
         }
     }
 })

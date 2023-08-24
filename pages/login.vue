@@ -1,19 +1,20 @@
 <template>
     <UCard class="w-8/12 mt-40 mx-auto">
         <h1 class="text-primary-400 font-bold text-4xl mb-6">Login</h1>
-        <form @submit.prevent>
-            <UInputGroup label="Email" hint="Required" class="mb-5" required>
-                <UInput v-model="email" name="email" placeholder="you@example.com" icon="i-heroicons-envelope" />
-            </UInputGroup>
+        <UForm ref="form" :validate="validate" :state="state" @submit.prevent="submit">
 
-            <UInputGroup label="Password" hint="Required" class="my-5" required>
-                <UInput v-model="password" name="password" placeholder="********" icon="i-heroicons-lock-closed" />
-            </UInputGroup>
+            <UFormGroup label="Email" name="email" class="mb-5">
+                <UInput v-model="state.email" placeholder="you@example.com" icon="i-heroicons-envelope" />
+            </UFormGroup>
 
-            <UButton class="mt-8" block @click="submit">
+            <UFormGroup label="Password" name="password" class="my-5">
+                <UInput v-model="state.password" type="password" placeholder="********" icon="i-heroicons-lock-closed"  />
+            </UFormGroup>
+
+            <UButton type="submit" class="mt-8" block>
                 <b>Submit</b>
             </UButton>
-        </form>
+        </UForm>
     </UCard>
 </template>
 
@@ -22,26 +23,49 @@ definePageMeta({
     layout: "public",
 });
 
-let user = useAuth();
+let user = await useAuth();
 
-let email: string = '';
-let password: string = '';
+if (user !== null) {
+    navigateTo('/user');
+}
+
+import type { FormError } from '@nuxthq/ui/dist/runtime/types'
+
+let email: string | undefined = undefined;
+let password: string | undefined = undefined;
+
+const state = ref({
+    email: email,
+    password: password
+})
+
+const validate = (state: any): FormError[] => {
+    const errors = []
+    if (!state.email) errors.push({ path: 'email', message: 'Required' })
+    if (!state.password) errors.push({ path: 'password', message: 'Required' })
+    return errors
+}
+
+const form = ref()
 
 async function submit() {
+    await form.value!.validate()
+
     try {
         const runtimeConfig = useRuntimeConfig()
         const { data } = await useFetch(`${runtimeConfig.public.apiBaseUrl}/auth/login`, {
             method: 'POST',
             body: {
-                'email': email,
-                'password': password,
+                'email': state.value.email,
+                'password': state.value.password,
             }
         })
+
         console.log(data);
+        console.log(data.value.accessToken)
+        localStorage.setItem(ACCESS_TOKEN_KEY, data.value.accessToken)
 
-        console.log(response);
-
-        //navigateTo('/user');
+        navigateTo('/user');
     } catch (error) {
         console.log(error.response);
     }
